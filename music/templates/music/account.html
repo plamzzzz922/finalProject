@@ -1,0 +1,18 @@
+{% extends 'music/base.html' %}
+{% block title %}Account · Tunes{% endblock %}
+
+{% block header %}
+<header class="subbar"><a class="back" href="{% url 'home' %}" aria-label="Back">&larr;</a></header>
+{% endblock %}
+
+{% block content %}
+<div class="account">
+  <div class="avatar avatar-lg" aria-hidden="true"></div>
+  <h1 class="account-name">Username</h1>
+  <nav class="account-links" aria-label="Account">
+    <a href="{% url 'recent' %}">Recent Music</a>
+    <a href="{% url 'settings' %}">Settings</a>
+    <a href="{% url 'login' %}">Log Out</a>
+  </nav>
+</div>
+{% endblock %}

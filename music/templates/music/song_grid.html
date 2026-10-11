@@ -1,0 +1,15 @@
+{% extends 'music/base.html' %}
+{% block title %}{{ title }} · Tunes{% endblock %}
+
+{% block header %}
+{% url 'home' as home_url %}
+<header class="subbar"><a class="back" href="{{ back_url|default:home_url }}" aria-label="Back">&larr;</a></header>
+{% endblock %}
+
+{% block content %}
+<h1 class="page-title">{{ title }}</h1>
+<div class="grid-3"{% if collection %} data-collection="{{ collection }}"{% endif %}>
+  {% for song in songs %}{% include 'music/_song_card.html' %}{% endfor %}
+</div>
+<p class="empty center" data-empty{% if songs %} hidden{% endif %}>{{ empty_message }}</p>
+{% endblock %}

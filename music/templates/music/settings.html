@@ -1,0 +1,13 @@
+{% extends 'music/base.html' %}
+{% block title %}Settings · Tunes{% endblock %}
+
+{% block header %}
+<header class="subbar"><a class="back" href="{% url 'account' %}" aria-label="Back to account">&larr;</a></header>
+{% endblock %}
+
+{% block content %}
+<h1 class="page-title">Settings</h1>
+<p class="empty">This app has no database. Your liked songs and recent music are remembered only in this browser.</p>
+<button class="btn" type="button" data-reset>Reset liked songs and recent music</button>
+<p class="empty" data-reset-status role="status" hidden>Done. Liked songs are back to the defaults and recent music is cleared.</p>
+{% endblock %}

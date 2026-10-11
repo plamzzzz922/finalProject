@@ -1,0 +1,56 @@
+{% extends 'music/base.html' %}
+{% block title %}Home · Tunes{% endblock %}
+
+{% block header %}
+<header class="topbar">
+  <form class="search" action="{% url 'search' %}" method="get" role="search">
+    <label class="sr-only" for="q">Search songs</label>
+    <input type="search" id="q" name="q" placeholder="Search...">
+  </form>
+  <a class="avatar-link" href="{% url 'account' %}" aria-label="Your account">
+    <span class="avatar avatar-sm" aria-hidden="true"></span>
+    <span class="avatar-name">Username</span>
+  </a>
+</header>
+{% endblock %}
+
+{% block content %}
+<section aria-labelledby="h-liked">
+  <h2 class="section-title" id="h-liked"><a href="{% url 'liked' %}">Liked Songs<span class="tri" aria-hidden="true"></span></a></h2>
+  <div class="grid-3" data-collection="liked" data-limit="3">
+    {% for song in songs %}{% include 'music/_song_card.html' %}{% endfor %}
+  </div>
+  <p class="empty" data-empty hidden>Tap the star on a song to save it here.</p>
+</section>
+
+<section aria-labelledby="h-playlist">
+  <h2 class="section-title" id="h-playlist"><a href="{% url 'playlists' %}">My Playlist<span class="tri" aria-hidden="true"></span></a></h2>
+  <div class="grid-3">{% for playlist in playlists %}{% include 'music/_playlist_card.html' %}{% endfor %}</div>
+</section>
+
+<section aria-labelledby="h-trending">
+  <h2 class="section-title" id="h-trending"><a href="{% url 'trending' %}">Trending now<span class="tri" aria-hidden="true"></span></a></h2>
+  <div class="grid-3">{% for song in trending %}{% include 'music/_song_card.html' %}{% endfor %}</div>
+</section>
+
+{{ songs_json|json_script:"songs-data" }}
+{% endblock %}
+
+{% block footer %}
+<footer class="dock">
+  <div class="mini-player" id="mini-player" data-url-template="{% url 'player' 0 %}" hidden>
+    <span class="disc" aria-hidden="true"></span>
+    <div class="mini-text">
+      <strong id="mini-title"></strong>
+      <span id="mini-artist"></span>
+    </div>
+    <a class="mini-play" id="mini-link" href="#" aria-label="Open player">
+      <svg viewBox="0 0 24 24" width="30" height="30" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
+    </a>
+  </div>
+  <nav class="tabbar" aria-label="Main">
+    <a href="{% url 'home' %}" aria-current="page">Home</a>
+    <a href="{% url 'playlists' %}">Playlist</a>
+  </nav>
+</footer>
+{% endblock %}
